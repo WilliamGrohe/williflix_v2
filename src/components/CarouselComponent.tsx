@@ -2,13 +2,17 @@ import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
+interface MoviesInterface{
+  id: number,
+  poster_path: string
+}
+
 export function CarouselComponent() {
   const APIKEY = import.meta.env.VITE_APIKEY;
   const imagePath = "https://image.tmdb.org/t/p/w500";
 
   const [movies, setMovies] = useState([]);
 
-  // console.log(APIKEY)
   useEffect(() => {
     //consumindo a API
 
@@ -31,9 +35,9 @@ export function CarouselComponent() {
         autoPlay
         emulateTouch
       >
-        {movies.map((movie) => {
+        {movies.map((movie: MoviesInterface) => {
           return (
-            <div className="m-1" key={movie.key}>
+            <div className="m-1" key={movie.id}>
               <img
                 className="rounded-lg"
                 src={`${imagePath}${movie.poster_path}`}
