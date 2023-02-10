@@ -38,8 +38,8 @@ export function CarouselComponent() {
       >
         {movies.map((movie: MoviesInterface) => {
           return (
-            <Link to={`/details/${movie.id}`}>
-              <div className="m-1" key={movie.id}>
+            <Link to={`/details/${movie.id}` } key={movie.id}>
+              <div className="m-1" >
                 <img
                   className="rounded-lg"
                   src={`${imagePath}${movie.poster_path}`}
