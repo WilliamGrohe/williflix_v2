@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Link } from "react-router-dom";
 
-interface MoviesInterface{
-  id: number,
-  poster_path: string
+interface MoviesInterface {
+  id: number;
+  poster_path: string;
 }
 
 export function CarouselComponent() {
@@ -37,13 +38,15 @@ export function CarouselComponent() {
       >
         {movies.map((movie: MoviesInterface) => {
           return (
-            <div className="m-1" key={movie.id}>
-              <img
-                className="rounded-lg"
-                src={`${imagePath}${movie.poster_path}`}
-                alt=""
-              />
-            </div>
+            <Link to={`/details/${movie.id}`}>
+              <div className="m-1" key={movie.id}>
+                <img
+                  className="rounded-lg"
+                  src={`${imagePath}${movie.poster_path}`}
+                  alt=""
+                />
+              </div>
+            </Link>
           );
         })}
       </Carousel>
