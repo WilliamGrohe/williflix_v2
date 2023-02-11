@@ -1,4 +1,6 @@
+<p align="center">
 <img align="center" src="./src/assets/logo.png"/> V.2.0
+</p>
 
 Este projeto foi desenvolvido com o objetivo de proporcionar aos usuários acesso a informações, dados e trailers de filmes, séries e documentários. Ele é baseado no popular serviço de streaming de vídeo, Netflix.
 Essa é uma nova versão de um mesmo projeto construído anteriormente com dados e informações estáticas.
