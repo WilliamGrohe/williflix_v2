@@ -8,7 +8,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <Routes>
       <Route path='/' element={<App />}/>
-      <Route path='/details/:id' element={<Details />}/>
+      <Route path='/details/:media_type/:id' element={<Details />}/>
     </Routes>
   </BrowserRouter>,
 )

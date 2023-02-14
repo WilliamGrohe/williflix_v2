@@ -1,9 +1,10 @@
+import { type } from "os";
 import { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Link } from "react-router-dom";
 
-interface MoviesInterface {
+type MoviesType = {
   id: number;
   poster_path: string;
 }
@@ -26,6 +27,7 @@ export function CarouselComponent() {
 
   return (
     <div className="block justify-center items-center p-6">
+      <h2 className="text-xl text-zinc-50 font-semibold mb-4">Filmes Populares</h2>
       <Carousel
         showArrows
         infiniteLoop
@@ -36,9 +38,9 @@ export function CarouselComponent() {
         autoPlay
         emulateTouch
       >
-        {movies.map((movie: MoviesInterface) => {
+        {movies.map((movie: MoviesType) => {
           return (
-            <Link to={`/details/${movie.id}` } key={movie.id}>
+            <Link to={`/details/movie/${movie.id}` } key={movie.id}>
               <div className="m-1" >
                 <img
                   className="rounded-lg"

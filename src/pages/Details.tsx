@@ -9,10 +9,11 @@ type MovieType = {
   sinopse: string;
   releaseDate: string;
   voteAverage: number;
+  media_type: string;
 };
 
 export function Details() {
-  const { id } = useParams();
+  const { id, media_type } = useParams();
 
   const APIKEY = import.meta.env.VITE_APIKEY;
   const imagePath = "https://image.tmdb.org/t/p/w500";
@@ -23,11 +24,11 @@ export function Details() {
     //consumindo a API
 
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${APIKEY}&language=pt-BR`
+      `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${APIKEY}&language=pt-BR`
     )
       .then((response) => response.json())
       .then((data) => {
-        const { title, poster_path, overview, release_date, vote_average } = data;
+        const { title, poster_path, overview, release_date, vote_average, media_type } = data;
         const movie = {
           id,
           title,
@@ -35,6 +36,7 @@ export function Details() {
           image: `${imagePath}${poster_path}`,
           releaseDate: release_date,
           voteAverage: vote_average,
+          media_type: media_type,
         };
 
         setMovie(movie as any);
