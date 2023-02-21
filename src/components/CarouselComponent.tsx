@@ -9,6 +9,10 @@ type MoviesType = {
   poster_path: string;
 }
 
+type CarouselType = {
+  type: string;
+}
+
 export function CarouselComponent() {
   const APIKEY = import.meta.env.VITE_APIKEY;
   const imagePath = "https://image.tmdb.org/t/p/w500";

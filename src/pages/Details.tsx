@@ -6,10 +6,12 @@ import { AiFillStar, AiFillPlaySquare } from "react-icons/ai";
 type MovieType = {
   id: number;
   title: string;
-  image: string;
-  sinopse: string;
-  releaseDate: string;
-  voteAverage: number;
+  name: string;
+  poster_path: string;
+  overview: string;
+  release_date: string;
+  first_air_date: string;
+  vote_average: number;
   media_type: string;
 };
 
@@ -27,46 +29,27 @@ export function Details() {
   const [movie, setMovie] = useState({} as MovieType);
   const [video, setVideo] = useState({} as VideoType);
 
-  useEffect(() => {
-    //consumindo a API
-
-    fetch(
+  async function fetchApi() {
+    //buscando as informações
+    const response = await fetch(
       `https://api.themoviedb.org/3/${media_type}/${id}?api_key=${APIKEY}&language=pt-BR&append_to_response=videos`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        const {
-          title,
-          poster_path,
-          overview,
-          release_date,
-          vote_average,
-          media_type,
-        } = data;
-        const movie = {
-          id,
-          title,
-          sinopse: overview,
-          image: `${imagePath}${poster_path}`,
-          releaseDate: release_date,
-          voteAverage: vote_average,
-          media_type: media_type,
-        };
+    );
+    const data = await response.json();
 
-        setMovie(movie as any);
-        console.log(data)
-      });
+    setMovie(data)
 
-    //GET VIDEO TRAILER
-    fetch(
-      `https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${APIKEY}&language=pt-BR`
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        setVideo(data.results[0]);
-        console.log(data);
-      });
+    //buscando a key do trailer
+    const responseVideo = await fetch(`https://api.themoviedb.org/3/${media_type}/${id}/videos?api_key=${APIKEY}&language=pt-BR`);
+    const dataVideo = await responseVideo.json()
+    setVideo(dataVideo.results[0]);
+  }
+  
+  useEffect(() => {
+    
+    fetchApi()
+
   }, [id]);
+
 
   return (
     <>
@@ -75,20 +58,20 @@ export function Details() {
       <div className="flex mt-16 justify-center items-center">
         <img
           className="rounded-lg w-80 shadow-md"
-          src={movie.image}
+          src={imagePath + movie.poster_path}
           alt={`Poster do filme ${movie.title}`}
         />
         <div className="flex flex-col items-start max-w-[50%] ml-10">
-          <h1 className="mt-12 mb-12 font-bold text-4xl">{movie.title}</h1>
+          <h1 className="mt-12 mb-12 font-bold text-4xl">{movie.title || movie.name}</h1>
           <div className="">
             <h3 className="text-xl font-bold pb-2">Sinopse</h3>
-            <span className="mb-4">{movie.sinopse}</span>
+            <span className="mb-4">{movie.overview}</span>
           </div>
           <span className="mb-4">
-            <AiFillStar className="inline-flex" /> {movie.voteAverage}
+            <AiFillStar className="inline-flex" /> {movie.vote_average}
           </span>
           <span className="opacity-50">
-            Data de Lançamento: {movie.releaseDate}
+            Data de Lançamento: {movie.release_date || movie.first_air_date}
           </span>
 
           <Link

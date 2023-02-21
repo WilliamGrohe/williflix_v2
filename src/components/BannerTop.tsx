@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 type MovieType = {
   title: string;
+  name: string;
   backdrop_path: string;
   poster_path: string;
   id: number;
@@ -35,7 +36,7 @@ export function BannerTop() {
     >
       <div className="p-10 flex content-center flex-col">
         <h1 className="text-6xl font-bold flex-wrap w-max-96 w-60">
-          {movie.title}
+          {movie.title || movie.name}
         </h1>
         <span className="w-96  rounded-3xl p-2 mt-2 backdrop-blur-md">
           {movie.overview}
