@@ -11,7 +11,8 @@ function App() {
     <>
       <Header />
       <BannerTop />
-      <CarouselComponent />
+      <CarouselComponent type="movie" options="popular" description="Filmes Populares"/>
+      <CarouselComponent type="tv" options="popular" description="Seriados Populares"/>
       
     </>
     )

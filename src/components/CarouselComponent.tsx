@@ -10,10 +10,12 @@ type MoviesType = {
 }
 
 type CarouselType = {
+  options: string;
   type: string;
+  description: string;
 }
 
-export function CarouselComponent() {
+export function CarouselComponent({options, type, description}: CarouselType) {
   const APIKEY = import.meta.env.VITE_APIKEY;
   const imagePath = "https://image.tmdb.org/t/p/w500";
 
@@ -23,7 +25,7 @@ export function CarouselComponent() {
     //consumindo a API
 
     fetch(
-      `https://api.themoviedb.org/3/movie/popular?api_key=${APIKEY}&language=pt-BR`
+      `https://api.themoviedb.org/3/${type}/${options}?api_key=${APIKEY}&language=pt-BR`
     )
       .then((response) => response.json())
       .then((data) => setMovies(data.results));
@@ -31,7 +33,7 @@ export function CarouselComponent() {
 
   return (
     <div className="block justify-center items-center p-6">
-      <h2 className="text-xl text-zinc-50 font-semibold mb-4">Filmes Populares</h2>
+      <h2 className="text-xl text-zinc-50 font-semibold mb-4">{description}</h2>
       <Carousel
         showArrows
         infiniteLoop
@@ -44,7 +46,7 @@ export function CarouselComponent() {
       >
         {movies.map((movie: MoviesType) => {
           return (
-            <Link to={`/details/movie/${movie.id}` } key={movie.id}>
+            <Link to={`/details/${type}/${movie.id}` } key={movie.id}>
               <div className="m-1" >
                 <img
                   className="rounded-lg"
