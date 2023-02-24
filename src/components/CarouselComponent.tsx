@@ -34,6 +34,9 @@ export function CarouselComponent({options, type, description}: CarouselType) {
   return (
     <div className="block justify-center items-center p-6">
       <h2 className="text-xl text-zinc-50 font-semibold mb-4">{description}</h2>
+      <ul>
+
+      
       <Carousel
         showArrows
         infiniteLoop
@@ -47,17 +50,18 @@ export function CarouselComponent({options, type, description}: CarouselType) {
         {movies.map((movie: MoviesType) => {
           return (
             <Link to={`/details/${type}/${movie.id}` } key={movie.id}>
-              <div className="m-1" >
+              <li className="m-1" >
                 <img
                   className="rounded-lg"
                   src={`${imagePath}${movie.poster_path}`}
                   alt=""
                 />
-              </div>
+              </li>
             </Link>
           );
         })}
       </Carousel>
+      </ul>
     </div>
   );
 }

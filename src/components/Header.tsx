@@ -9,7 +9,7 @@ export function Header() {
           <img className="h-8 m-4" src={LogoPng} alt="WILLIFLIX" />
           <nav className="flex gap-3 text-zinc-400">
             <Link className="hover:text-zinc-50" to="/">Inicio</Link>
-            <Link className="hover:text-zinc-50 flex items-center gap-1" to="/">
+            <Link className="hover:text-zinc-50 flex items-center gap-1" to="/search">
               <AiOutlineSearch /> Buscar
             </Link>
             
