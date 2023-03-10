@@ -30,6 +30,7 @@ export function Details() {
 
   const [movie, setMovie] = useState({} as MovieType);
   const [video, setVideo] = useState({} as VideoType);
+  const [videoKey, setVideoKey] = useState('');
 
   async function fetchApi() {
     //buscando as informações
@@ -46,13 +47,14 @@ export function Details() {
     );
     const dataVideo = await responseVideo.json();
     setVideo(dataVideo.results[0]);
+    
   }
 
   useEffect(() => {
     fetchApi();
+    setVideoKey(video.key)
   }, [id]);
 
-  console.log(imagePath + movie.backdrop_path);
 
   return (
     <>
@@ -101,7 +103,7 @@ export function Details() {
           <iframe
             width="789"
             height="329"
-            src={`https://www.youtube.com/embed/${video.key}`}
+            src={`https://www.youtube.com/embed/${video.key || videoKey}`}
             title="Fight Club - Theatrical Trailer Remastered in HD"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             allowFullScreen

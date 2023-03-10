@@ -42,7 +42,7 @@ export function BannerTop() {
           {movie.overview}
         </span>
         <Link
-          className="bg-red-700 w-[40%] px-8 py-3 mt-4 rounded-2xl text-center font-semibold hover:bg-red-800"
+          className="bg-red-700 w-[50%] px-1 py-3 mt-4 rounded-2xl text-center font-semibold hover:bg-red-800"
           to={`/details/${movie.media_type}/${movie.id}`}
           key={movie.id}
         >
